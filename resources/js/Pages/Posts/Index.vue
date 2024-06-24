@@ -1,8 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, router, useForm, usePage } from "@inertiajs/vue3";
-import { watch } from "vue";
-import { useToast } from "vue-toastification";
+import { Head, Link, router, useForm } from "@inertiajs/vue3";
 
 defineProps({
     posts: {
@@ -12,22 +10,11 @@ defineProps({
         type: Object,
     }
 });
-const page = usePage();
-const toast = useToast();
 
 const form = useForm("StorePost", {
     'body': '',
 });
 
-watch(() => page.props.message,
-    (message) => {
-        if (message) {
-            toast(message.body, {
-                type: message.type,
-            });
-        }
-    }
-)
 
 const createPost = () => {
     form.post(route('posts.store'), {
@@ -100,15 +87,6 @@ const refreshPosts = () => {
                     >
                         Refresh posts
                     </button>
-<!-- 
-                    <Link
-                        preserve-scroll
-                        :only="['posts']"
-                        :href="route('posts.index')"
-                        class="text-sm text-indigo-700"
-                    >
-                        Refresh posts
-                    </Link> -->
                 </div>
                 <div v-for="post in posts.data" :key="post.id">
                     <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
