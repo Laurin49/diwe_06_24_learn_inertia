@@ -25,9 +25,6 @@ class PostController extends Controller
 
         return redirect()
             ->route('posts.index')
-            ->with('message', [                           // bearbeitet in HandleInertiaRequests.php
-                'type' => 'success',
-                'body' => 'Post created successfully',
-            ]);
+            ->with('success', 'Post created successfully');
     }
 }
